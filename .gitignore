@@ -1,0 +1,23 @@
+node_modules/
+dist/
+.wrangler/
+
+# local config and secrets
+.env
+.env.*
+!.env.example
+.dev.vars
+.dev.vars.*
+!.dev.vars.example
+wrangler.toml
+
+# race data captured locally
+logs/
+*.sql
+!migrations/*.sql
+*.gpx
+
+.DS_Store
+
+# old local state from the pre-template layout
+.legacy/

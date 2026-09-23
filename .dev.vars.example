@@ -1,0 +1,15 @@
+# Worker secrets for `wrangler dev`. Copy to .dev.vars (git-ignored).
+# In production set each one with: npx wrangler secret put <NAME>
+
+# Required to call /logger/start, /logger/stop and /logger/reload
+CONTROL_KEY=change-me
+
+# Email alerts through https://resend.com (optional)
+RESEND_API_KEY=
+WATCH_BIBS=
+ALERT_TO=
+ALERT_FROM=
+
+# Geo gate (optional, only used when race.json has `geoBlock`)
+BYPASS_TOKEN=
+GEO_DEBUG_KEY=

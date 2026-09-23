@@ -1,0 +1,64 @@
+{
+  "id": "vmm-2026",
+  "name": "VMM 2026",
+  "location": "Sa Pa, Vietnam",
+  "timezone": "Asia/Ho_Chi_Minh",
+  "locale": "en-GB",
+  "defaultBib": "16020",
+  "raceresult": {
+    "server": "https://my-hk-1.raceresult.com",
+    "eventId": "376055",
+    "key": "db7442f2d59abaa1c7bc7615e55bfc9a",
+    "listName": "Result Lists|0.LiveRank",
+    "headers": {
+      "origin": "https://vietnamtrailseries.com",
+      "referer": "https://vietnamtrailseries.com/"
+    }
+  },
+  "labelAliases": { "Pre Finish": "Finish" },
+  "contests": [
+    {
+      "id": 160,
+      "name": "Ultra 100 Miles",
+      "start": "2026-09-18T08:00:00+07:00",
+      "track": {
+        "routeFile": "route-160.json",
+        "note": "The CP M2 position on the Sa Pa loops is the turnaround point on the GPX and may be a few hundred metres off.",
+        "laps": {
+          "name": "Sa Pa loops",
+          "description": "Each loop is Sa Pa → CP M2 → Sa Pa on the same trail, so comparing loops shows how much a runner is slowing down.",
+          "checkpoints": ["Start", "CP_SAPA1", "CP_SAPA2", "CP_SAPA3", "CP_SAPA4"]
+        },
+        "checkpoints": [
+          { "key": "Start", "label": "Start", "km": 0, "onProfile": false },
+          { "key": "CP_M21", "label": "CP M2 · Lap 1", "short": "M2·1", "km": 5.86 },
+          { "key": "CP_SAPA1", "label": "CP Sapa · Lap 1", "short": "Sapa·1", "km": 14.6 },
+          { "key": "CP_M22", "label": "CP M2 · Lap 2", "short": "M2·2", "km": 20.46, "onMap": false, "onProfile": false },
+          { "key": "CP_SAPA2", "label": "CP Sapa · Lap 2", "short": "Sapa·2", "km": 28.7, "onMap": false, "onProfile": false },
+          { "key": "CP_M23", "label": "CP M2 · Lap 3", "short": "M2·3", "km": 34.56, "onMap": false, "onProfile": false },
+          { "key": "CP_SAPA3", "label": "CP Sapa · Lap 3", "short": "Sapa·3", "km": 42.9, "onMap": false, "onProfile": false },
+          { "key": "CP_M24", "label": "CP M2 · Lap 4", "short": "M2·4", "km": 48.76, "onMap": false, "onProfile": false },
+          { "key": "CP_SAPA4", "label": "CP Sapa · Lap 4", "short": "Sapa·4", "km": 57.1, "onMap": false, "onProfile": false },
+          { "key": "CP_M25", "label": "CP M2a", "short": "M2a", "km": 63.07 },
+          { "key": "CP_M2B", "label": "CP M2b", "short": "M2b", "km": 65.4, "onProfile": false },
+          { "key": "CP_M3", "label": "CP M3", "short": "M3", "km": 70.7 },
+          { "key": "CP_M4", "label": "CP M4", "short": "M4", "km": 81.8 },
+          { "key": "CP_TEL", "label": "CP Topas Ecolodge", "short": "Topas", "km": 84.5 },
+          { "key": "CP1", "label": "CP1", "km": 98.7 },
+          { "key": "CP2", "label": "CP2", "km": 111.2 },
+          { "key": "CP3", "label": "CP3", "km": 119.3 },
+          { "key": "CP4", "label": "CP4", "km": 128.7 },
+          { "key": "CP5", "label": "CP5", "km": 136.5 },
+          { "key": "CP6", "label": "CP6", "km": 145.8 },
+          { "key": "CP7", "label": "CP7", "km": 151.4 },
+          { "key": "Finish", "label": "Finish", "km": null }
+        ]
+      }
+    },
+    { "id": 100, "name": "100K" },
+    { "id": 70, "name": "70K" },
+    { "id": 50, "name": "50K" },
+    { "id": 21, "name": "21K" },
+    { "id": 10, "name": "10K" }
+  ]
+}

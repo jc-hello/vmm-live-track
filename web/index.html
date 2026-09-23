@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Live Race Tracker</title>
+<meta name="description" content="Follow trail runners live on a 3D map">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><path d='M2 28 12 10l5 8 4-5 9 15z' fill='%23ff5a1f'/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+<div id="map"></div>
+<div class="toolbar">
+  <button class="btn ghost" id="fullBtn" title="Full-screen map">⛶<span class="lbl"> Exit</span></button>
+  <button class="btn ghost" id="styleBtn">Satellite</button>
+  <button class="btn ghost" id="followBtn">Follow: on</button>
+</div>
+<div class="mhead m-only"><b class="raceTitle">–</b><div style="display:flex;align-items:center"><div class="live" id="liveM"><i></i><span id="liveTxtM">Live</span></div><a class="toAnalytics" href="analytics.html">Analytics ›</a></div></div>
+<div class="chip" id="chip"></div>
+<div class="app">
+  <aside class="side" id="sheet">
+    <div class="handle" id="handle"><i></i></div>
+    <div class="card brand">
+      <div><h1 class="raceTitle">–</h1><small><span id="raceLocation">–</span> · <span id="routeMeta">–</span></small></div>
+      <div class="live" id="live"><i></i><span id="liveTxt">Live</span></div>
+    </div>
+    <nav class="card tabs d-only" style="margin-top:0;padding:3px"><a class="on" href="#">Map</a><a class="toAnalytics" href="analytics.html">Performance analytics</a></nav>
+
+    <div class="card" id="runnerCard">
+      <div class="muted" id="bibLine">Bib –</div>
+      <div class="runner-name" id="rName">Loading…</div>
+      <div class="runner-sub" id="rSub"></div>
+      <div class="big-rank">
+        <div class="stat"><span>Overall rank</span><b id="sRank">–</b></div>
+        <div class="stat"><span>Distance (est.)</span><b id="sKm">–</b></div>
+        <div class="stat"><span>Race time</span><b id="sTime">–</b></div>
+      </div>
+      <div class="nextline m-only"><span id="mNext">–</span><b id="mEta"></b></div>
+      <div class="progress"><i id="prog"></i></div>
+      <div class="muted" id="progTxt"></div>
+      <div style="margin-top:10px">
+        <div class="row"><span>Last checkpoint</span><b id="rLast">–</b></div>
+        <div class="row"><span>Arrived</span><b id="rLastAt">–</b></div>
+        <div class="row"><span>Next checkpoint</span><b id="rNext">–</b></div>
+        <div class="row"><span>Expected at</span><b id="rEta" class="est">–</b></div>
+        <div class="row"><span>Behind leader</span><b id="rGap">–</b></div>
+        <div class="row"><span>Gender / age group rank</span><b id="rGender">–</b></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Follow another runner</h3>
+      <form class="search" id="bibForm"><input id="bibInput" inputmode="search" placeholder="Bib or name…"><button>Go</button></form>
+      <div class="muted" id="searchMsg" style="margin-top:6px"></div>
+    </div>
+
+    <div class="card">
+      <h3>Top 5 · <span id="countTxt">–</span></h3>
+      <ul class="leaders" id="leaders"></ul>
+    </div>
+
+    <div class="card">
+      <h3>Checkpoints</h3>
+      <ul class="cps" id="cpList"></ul>
+    </div>
+
+    <div class="card note">
+      Chip data from raceresult, refreshed every 30 seconds. The solid orange dot is an <b>estimated position</b>, interpolated at the runner's own pace since the last checkpoint and adjusted for climbing (1 km + 100 m of climb). The white dot with an orange ring is the last checkpoint confirmed by the chip.
+      <span id="trackNote"></span>
+    </div>
+  </aside>
+
+  <div class="card bottom" id="profileCard">
+    <svg id="profile" preserveAspectRatio="none"></svg>
+  </div>
+</div>
+<script type="module" src="../src/web/map.ts"></script>
+</body>
+</html>

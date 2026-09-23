@@ -1,0 +1,42 @@
+# Copy to wrangler.toml (git-ignored) and fill in your own values:
+#   cp wrangler.example.toml wrangler.toml
+name = "race-tracker"
+main = "src/worker/index.ts"
+compatibility_date = "2026-05-01"
+workers_dev = true
+
+# The built site (npm run build). The Worker only runs for the paths below;
+# everything else is served straight from the assets. Set run_worker_first = true
+# if you enable `geoBlock` in race.json, so page requests pass through the Worker.
+[assets]
+directory = "./dist"
+binding = "ASSETS"
+run_worker_first = ["/api/*", "/logger/*", "/__geo"]
+
+[observability]
+enabled = true
+
+[[durable_objects.bindings]]
+name = "POLLER"
+class_name = "Poller"
+
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["Poller"]
+
+# npx wrangler d1 create race-tracker  -> paste the database_id here
+[[d1_databases]]
+binding = "DB"
+database_name = "race-tracker"
+database_id = "<your-d1-database-id>"
+migrations_dir = "migrations"
+
+[vars]
+SITE_URL = "https://race-tracker.<your-subdomain>.workers.dev"
+# Email alerts (optional): also set the RESEND_API_KEY secret.
+# WATCH_BIBS = "1234,5678"
+# ALERT_TO = "you@example.com"
+# ALERT_FROM = "Race Tracker <alerts@your-domain.com>"
+
+# Secrets (npx wrangler secret put <NAME>), see .dev.vars.example:
+#   CONTROL_KEY, RESEND_API_KEY, BYPASS_TOKEN, GEO_DEBUG_KEY

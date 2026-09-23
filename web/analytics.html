@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Race Analytics</title>
+<meta name="description" content="Live pacing and fatigue analytics for a trail race">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><path d='M2 28 12 10l5 8 4-5 9 15z' fill='%23ff5a1f'/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+<header class="top"><div class="top-in">
+  <div class="brand raceTitle">–</div>
+  <nav class="tabs"><a id="tabMap" href="./">Map</a><a class="on" href="#">Analytics</a></nav>
+  <div class="pick">
+    <label for="bibIn">Runner</label><input id="bibIn" list="bibList" placeholder="Bib or name" autocomplete="off"><datalist id="bibList"></datalist>
+    <label for="cmp">Compare with</label><select id="cmp"></select>
+    <span class="live" id="live"><i></i><span id="liveTxt">–</span></span>
+  </div>
+</div></header>
+
+<main>
+  <div class="who">
+    <div><h1 id="name">Loading…</h1><div class="sub" id="sub"></div></div>
+  </div>
+
+  <section class="tiles">
+    <div class="tile"><span>Live rank</span><b id="tRank">–</b><small id="tRankSub"></small></div>
+    <div class="tile"><span>Checkpoint</span><b id="tCp">–</b><small id="tCpSub"></small></div>
+    <div class="tile"><span>Last segment vs median</span><b id="tSeg">–</b><small id="tSegSub"></small></div>
+    <div class="tile"><span>Fatigue index</span><b id="tFat">–</b><small id="tFatSub"></small></div>
+    <div class="tile"><span>Projected finish</span><b id="tEta">–</b><small id="tEtaSub"></small></div>
+  </section>
+
+  <section class="insights"><h2>Automatic insights</h2><ul id="insights"><li class="muted">Calculating…</li></ul></section>
+
+  <section class="grid">
+    <div class="card wide">
+      <h2>Race time at each checkpoint</h2>
+      <p class="desc">Race time on arrival at each checkpoint. The median is drawn only where at least 30% of the field has passed. The grey band is the middle 50% of runners (25th to 75th percentile); the dashed line is the median.</p>
+      <div class="legend" id="lgRace"></div>
+      <div class="ch tall"><canvas id="cRace"></canvas></div>
+    </div>
+    <div class="card">
+      <h2>Ahead of / behind the median at each checkpoint</h2>
+      <p class="desc">Minutes compared with the median runner at the same checkpoint. Negative is faster.</p>
+      <div class="ch"><canvas id="cGap"></canvas></div>
+    </div>
+    <div class="card">
+      <h2>Rank at each checkpoint</h2>
+      <p class="desc">Rank by arrival time, among runners recorded at that checkpoint.</p>
+      <div class="legend" id="lgRank"></div>
+      <div class="ch"><canvas id="cRank"></canvas></div>
+    </div>
+    <div class="card wide">
+      <h2>Segment pace · min / effort-km</h2>
+      <p class="desc">Effort-km = km + (metres climbed ÷ 100), so climbs and flats can be compared. Lower is faster.</p>
+      <div class="legend" id="lgSeg"></div>
+      <div class="ch"><canvas id="cSeg"></canvas></div>
+    </div>
+    <div class="card">
+      <h2>Fatigue index by segment</h2>
+      <p class="desc">Effort pace of each segment relative to the first one (100 = same as the start). The grey line is how much the median runner slows down. When the orange line is above the grey one, the runner is fading faster than the field.</p>
+      <div class="legend" id="lgFat"></div>
+      <div class="ch"><canvas id="cFat"></canvas></div>
+    </div>
+    <div class="card" id="lapCard" hidden>
+      <h2 id="lapTitle">Laps</h2>
+      <p class="desc" id="lapDesc">Time for each lap.</p>
+      <div class="legend" id="lgLap"></div>
+      <div class="ch"><canvas id="cLap"></canvas></div>
+    </div>
+    <div class="card">
+      <h2>Speed percentile by segment</h2>
+      <p class="desc">Share of runners this runner beat on that segment alone (100 = fastest).</p>
+      <div class="ch"><canvas id="cPct"></canvas></div>
+    </div>
+    <div class="card">
+      <h2>Live rank over time</h2>
+      <p class="desc">Rank on the raceresult live list, sampled every 10 minutes.</p>
+      <div class="ch"><canvas id="cLive"></canvas></div>
+    </div>
+    <div class="card wide">
+      <h2 id="histTitle">Arrival time distribution</h2>
+      <p class="desc">Runners by arrival time at this runner's latest checkpoint, in 10-minute bins. The orange bar is this runner's bin.</p>
+      <div class="ch"><canvas id="cHist"></canvas></div>
+    </div>
+    <div class="card wide">
+      <h2>Splits</h2>
+      <p class="desc">Pace in min/km, effort in min/effort-km.</p>
+      <div class="tablewrap"><table id="tbl"></table></div>
+    </div>
+  </section>
+  <p class="note">Data: the raceresult live list. The logger Worker records every runner every 30 seconds into Cloudflare D1. raceresult only publishes each runner's latest checkpoint, so splits overwritten before the logger started are lost. <span id="trackNote"></span></p>
+</main>
+<script type="module" src="../src/web/analytics.ts"></script>
+</body>
+</html>
